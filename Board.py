@@ -56,7 +56,6 @@ class Board:
 
     def getNeighboursNo(self, x, y):
         res = 0
-        if y==3:
         for i in range(x-1, x+2):
             for j in range(y-1,y+2):
                 if (x == i and y == j) or not self.checkCoords(i, j):
