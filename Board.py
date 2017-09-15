@@ -1,3 +1,5 @@
+import copy
+
 class Board:
     def __init__(self, canvas, pixels):
         self.canvas = canvas
@@ -8,9 +10,9 @@ class Board:
         self.initBoard(self.board)
 
     def initBoard(self, board):
-        for i in range(self.height):
+        for i in range(self.width):
             board.append([])
-            for j in range(self.width):
+            for j in range(self.height):
                 board[i].append(False)
         board[3][3] = True
         board[4][3] = True
@@ -18,15 +20,15 @@ class Board:
 
     def draw(self):
         for i in range(self.width):
-            y = 10*i
-            self.canvas.create_line(y, 0, y, self.height*self.pixels, fill="gray70")
+            x = 10*i
+            self.canvas.create_line(x, 0, x, 20, fill="gray70")
 
         for i in range(self.height):
             y = 10*i
             self.canvas.create_line(0, y, self.width*self.pixels, y, fill="gray70")
 
-        for i in range(self.height):
-            for j in range(self.width):
+        for i in range(self.width):
+            for j in range(self.height):
                 x = i * self.pixels
                 y = j * self.pixels
                 if self.board[i][j] == True:
@@ -34,15 +36,16 @@ class Board:
                 else:
                     self.canvas.create_rectangle(x, y, x + self.pixels, y + self.pixels, fill=self.canvas['background'])
 
-    def next(self):
-        tmp = self.board.copy()
 
-        for i in range(self.height):
-            for j in range(self.width):
+    def next(self):
+        tmp = copy.deepcopy(self.board)
+
+        for i in range(self.width):
+            for j in range(self.height):
                 cell = self.board[i][j]
                 neighborsNo = self.getNeighboursNo(i, j)
-                if(cell == False):
-                    if(neighborsNo == 3):
+                if cell == False:
+                    if neighborsNo == 3:
                         tmp[i][j] = True
                 else:
                     if neighborsNo != 2 and neighborsNo != 3:
@@ -53,9 +56,11 @@ class Board:
 
     def getNeighboursNo(self, x, y):
         res = 0
+        if y==3:
+            print("W")
         for i in range(x-1, x+2):
             for j in range(y-1,y+2):
-                if not self.checkCoords(i, j):
+                if (x == i and y == j) or not self.checkCoords(i, j):
                     continue
                 else:
                     if self.board[i][j] == True:
@@ -65,6 +70,6 @@ class Board:
     def checkCoords(self, i, j):
         if i < 0 or j < 0:
             return False
-        if i >= self.height or j >= self.width:
+        if i >= self.width or j >= self.height:
             return False
         return True
