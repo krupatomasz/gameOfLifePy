@@ -12,7 +12,6 @@ board.draw()
 
 def task():
     board.next()
-    print("EE")
     master.after(1000, task)
 
 
