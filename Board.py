@@ -3,7 +3,7 @@ import copy
 
 class Board:
     def __init__(self, canvas, pixels):
-        self.width = int(canvas['width']) // pixels
+        self.width = (int(canvas['width'])) // pixels
         self.height = int(canvas['height']) // pixels
         self.graphics = Graphics(self, canvas, pixels)
         self.board = []

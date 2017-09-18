@@ -1,19 +1,8 @@
-from tkinter import *
-from Board import *
-import time
-master = Tk()
+from Window import *
 
-w = Canvas(master, width=500, height=500)
-w.pack()
+def main():
+    window = Window()
+    window.mainloop()
 
-board = Board(w, 10)
-board.draw()
-
-
-def task():
-    board.next()
-    master.after(1000, task)
-
-
-master.after(1000, task)
-master.mainloop()
+if __name__ == "__main__":
+    main()

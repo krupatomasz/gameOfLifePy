@@ -5,9 +5,6 @@ class Graphics:
         self.pixels = pixels
 
     def draw(self):
-        self.drawBoard()
-
-    def drawBoard(self):
         width = self.board.width
         height = self.board.height
         for i in range(width):
