@@ -1,11 +1,11 @@
+from Graphics import *
 import copy
 
 class Board:
     def __init__(self, canvas, pixels):
-        self.canvas = canvas
-        self.width = int(self.canvas['width']) // pixels
-        self.height = int(self.canvas['height']) // pixels
-        self.pixels = pixels
+        self.width = int(canvas['width']) // pixels
+        self.height = int(canvas['height']) // pixels
+        self.graphics = Graphics(self, canvas, pixels)
         self.board = []
         self.initBoard(self.board)
 
@@ -19,23 +19,7 @@ class Board:
         board[5][3] = True
 
     def draw(self):
-        for i in range(self.width):
-            x = 10*i
-            self.canvas.create_line(x, 0, x, 20, fill="gray70")
-
-        for i in range(self.height):
-            y = 10*i
-            self.canvas.create_line(0, y, self.width*self.pixels, y, fill="gray70")
-
-        for i in range(self.width):
-            for j in range(self.height):
-                x = i * self.pixels
-                y = j * self.pixels
-                if self.board[i][j] == True:
-                    self.canvas.create_rectangle(x, y, x+self.pixels, y+self.pixels, fill="red")
-                else:
-                    self.canvas.create_rectangle(x, y, x + self.pixels, y + self.pixels, fill=self.canvas['background'])
-
+        self.graphics.draw()
 
     def next(self):
         tmp = copy.deepcopy(self.board)
