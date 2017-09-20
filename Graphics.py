@@ -9,7 +9,7 @@ class Graphics:
         height = self.board.height
         for i in range(width):
             x = self.pixels * i
-            self.canvas.create_line(x, 0, x, 20, fill="gray70")
+            self.canvas.create_line(x, 0, x, height*self.pixels, fill="gray70")
 
         for i in range(height):
             y = self.pixels * i

@@ -2,10 +2,11 @@ from Graphics import *
 import copy
 
 class Board:
-    def __init__(self, canvas, pixels):
+    def __init__(self, canvas, pixels, mainBoard):
         self.width = (int(canvas['width'])) // pixels
         self.height = int(canvas['height']) // pixels
         self.graphics = Graphics(self, canvas, pixels)
+        self.isMain = mainBoard
         self.board = []
         self.initBoard(self.board)
 
@@ -14,9 +15,6 @@ class Board:
             board.append([])
             for j in range(self.height):
                 board[i].append(False)
-        board[3][3] = True
-        board[4][3] = True
-        board[5][3] = True
 
     def draw(self):
         self.graphics.draw()
